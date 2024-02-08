@@ -2,7 +2,11 @@ const express = require('express')
 const app = express()
 
 app.get('/', function (req, res) {
-  res.send('Hello World')
+  res.json({
+    success: true,
+    message: 'server running properly',
+    status: 200
+  })
 })
 
 app.listen(3000, () => {
