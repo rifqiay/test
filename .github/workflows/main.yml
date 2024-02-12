@@ -13,11 +13,8 @@ jobs:
     - name: Deploy use ssh
       uses: appleboy/ssh-action@v1.0.3
       with:
-        host: 0.tcp.ap.ngrok.io
-        username: server1
-        key: ${{ secrets.PRIVATE_KEY }}
-        port: 19236
         script: |
+          ssh -o StrictHostKeyChecking=no -p 19236 server1@0.tcp.ap.ngrok.io
           cd project/test
           git pull origin main
           npm i
