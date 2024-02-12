@@ -1,6 +1,14 @@
 const express = require('express')
 const app = express()
 
+app.get('/hello', function (req, res) {
+    res.json({
+      success: true,
+      message: 'Hello world',
+      status: 200
+    })
+  })
+
 app.get('/', function (req, res) {
   res.json({
     success: true,
