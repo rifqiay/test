@@ -3,20 +3,14 @@ name: Node.js CD
 on:
   push:
     branches: [ "main" ]
-
 jobs:
-  build:
-
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: Deploy use ssh
-      uses: appleboy/ssh-action@v1.0.3
-      with:
-        script: |
-          sshpass -p 123123 ssh server1@0.tcp.ap.ngrok.io -p 19236
-          cd project/test
-          git pull origin main
-          npm i
-          pm2 restart index
-    
+      deploy:
+        runs-on: ubuntu-latest
+        steps:
+          - name: SSH Deploy
+            run: |
+              sshpass -p 123123 ssh -o StrictHostKeyChecking=no -p 19236 server1@$0.tcp.ap.ngrok.io
+              cd /home/server1/project/test
+              git pull origin main
+              npm intall
+              pm2 restart index
