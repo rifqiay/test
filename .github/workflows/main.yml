@@ -13,10 +13,47 @@ jobs:
     - name: Deploy use ssh
       uses: appleboy/ssh-action@v1.0.3
       with:
-        host: ${{ secrets.HOST }}
-        username: ${{ secrets.USERNAME }}
-        key: ${{ secrets.PRIVATE_KEY }}
-        port: ${{ secrets.PORT }}
+        host: 0.tcp.ap.ngrok.io
+        username: server1
+        key: -----BEGIN OPENSSH PRIVATE KEY-----
+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
+-----END OPENSSH PRIVATE KEY-----
+        port: 19236
         script: |
           cd project/test
           git pull origin main
