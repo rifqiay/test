@@ -5,15 +5,18 @@ on:
     branches: [ "main" ]
 
 jobs:
-  deploy:
+  build:
+
     runs-on: ubuntu-latest
+
     steps:
-      - name: SSH Deploy
-        env:
-          SSH_PASSWORD: ${{ secrets.SSH_PASSWORD }}
-        run: |
-          sshpass -p ${{ secrets.SSH_PASSWORD }} ssh -o StrictHostKeyChecking=no -p 19236 server1@$0.tcp.ap.ngrok.io
-            cd /home/server1/project/test
-            git pull origin main
-            npm install
-            pm2 restart index
+    - name: Deploy use ssh
+      uses: appleboy/ssh-action@v1.0.3
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        key: ${{ secrets.PRIVATE_KEY }}
+        port: ${{ secrets.PORT }}
+        script: |
+          cd public_html/test.programerndeso.my.id
+          git pull origin main
